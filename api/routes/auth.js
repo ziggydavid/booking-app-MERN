@@ -10,4 +10,6 @@ router.get("/register",(req, res) => {
     res.send("Register API")
 })
 
+
+
 export default router
