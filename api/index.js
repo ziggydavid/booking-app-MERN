@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
+import lodgeRouter from './routes/lodges.js';
 
 dotenv.config()
 
@@ -25,9 +26,9 @@ mongoose.connection.on('disconnected', () => {
     console.log("Disconnected")
   });
 
+app.use(express.json())
 app.use('/auth', authRouter);
-
-
+app.use('/api/lodges', lodgeRouter);
 app.listen(5000, () => {
     connect()
     console.log("Connected to server")
