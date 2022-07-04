@@ -26,9 +26,23 @@ mongoose.connection.on('disconnected', () => {
     console.log("Disconnected")
   });
 
+
+
 app.use(express.json())
 app.use('/auth', authRouter);
 app.use('/api/lodges', lodgeRouter);
+
+app.use((err,req,res,next) => {
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "Unable to complete this request"
+    return res.status(errorStatus).json({
+        success: false,
+        status:errorStatus,
+        message:errorMessage,
+        stack:err.stack 
+    })
+})
+
 app.listen(5000, () => {
     connect()
     console.log("Connected to server")
