@@ -1,4 +1,4 @@
-exports.getLodges = async (req, res) => {
+export const getLodges = async (req, res, next) => {
     const lodges = await Lodge.find().catch(err => {
         res.status(500).json(err);
     })
@@ -6,7 +6,7 @@ exports.getLodges = async (req, res) => {
     res.status(200).json(lodges)
 }
 
-exports.getLodge =  async (req, res, next) => {
+export const getLodge = async (req, res, next) => {
     const lodge = await Lodge.findById(req.params.id).catch(err => {
         next(err)
     })
@@ -15,7 +15,7 @@ exports.getLodge =  async (req, res, next) => {
 
 }
 
-exports.createLodge =  async (req, res) => {
+export const createLodge =  async (req, res) => {
     const newLodge = new Lodge(req.body)
     const savedLodge = await newLodge.save().
     catch(err => {
@@ -25,7 +25,7 @@ exports.createLodge =  async (req, res) => {
     res.status(200).json(savedLodge)
 }
 
-exports.updateLodge = async (req, res) => {
+export const updateLodge = async (req, res) => {
     const updatedLodge = await Lodge.findByIdAndUpdate(req.params.id, 
         {
         $set: req.body
@@ -38,7 +38,7 @@ exports.updateLodge = async (req, res) => {
     res.status(200).json(updatedLodge)
 }
 
-exports.deleteLodge = async (req, res) => {
+export const deleteLodge = async (req, res) => {
     await Lodge.findOneAndDelete(req.params.id).catch(
        err => {
            res.status(500).json(err)

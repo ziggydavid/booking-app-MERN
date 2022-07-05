@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
 import lodgeRouter from './routes/lodges.js';
 
+
+
+
 dotenv.config()
 
 const app = express()
@@ -29,7 +32,7 @@ mongoose.connection.on('disconnected', () => {
 
 
 app.use(express.json())
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/lodges', lodgeRouter);
 
 app.use((err,req,res,next) => {
