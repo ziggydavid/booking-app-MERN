@@ -3,14 +3,14 @@ import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
 import lodgeRouter from './routes/lodges.js';
-
+import cookieParser from "cookie-parser";
 
 
 
 dotenv.config()
 
 const app = express()
-
+app.use(cookieParser())
 
 const connect = async () => {
     const connection = await mongoose.connect(process.env.MONGODB).
