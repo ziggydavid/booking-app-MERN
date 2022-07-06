@@ -1,5 +1,5 @@
 import express from "express";
-import Lodge from "../models/Lodge.js"
+import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 import {updateLodge,createLodge,deleteLodge, getLodges } from "../controllers/lodgeController.js";
 import { getLodge } from "../controllers/lodgeController.js";
 
@@ -14,11 +14,11 @@ router.get('/', getLodges)
 //get
 router.get('/:id', getLodge)
 //create
-router.post("/", createLodge)
+router.post("/",verifyAdmin, createLodge)
 //update
-router.put('/:id', updateLodge)
+router.put('/:id',verifyAdmin, updateLodge)
 //Delete
-router.delete('/:id', deleteLodge)
+router.delete('/:id',verifyAdmin, deleteLodge)
 
 
 //another way of handling async calls

@@ -1,3 +1,4 @@
+import Lodge from "../models/Lodge.js"
 export const getLodges = async (req, res, next) => {
     const lodges = await Lodge.find().catch(err => {
         res.status(500).json(err);

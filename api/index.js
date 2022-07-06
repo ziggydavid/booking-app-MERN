@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
 import lodgeRouter from './routes/lodges.js';
 import cookieParser from "cookie-parser";
-
+import userRouter from './routes/users.js'
 
 
 dotenv.config()
@@ -34,6 +34,7 @@ mongoose.connection.on('disconnected', () => {
 app.use(express.json())
 app.use('/api/auth', authRouter);
 app.use('/api/lodges', lodgeRouter);
+app.use('/api/users', userRouter);
 
 app.use((err,req,res,next) => {
     const errorStatus = err.status || 500
