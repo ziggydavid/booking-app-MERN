@@ -1,7 +1,7 @@
 import Lodge from "../models/Lodge.js"
 export const getLodges = async (req, res, next) => {
     const lodges = await Lodge.find().catch(err => {
-        res.status(500).json(err);
+        next(err);
     })
 
     res.status(200).json(lodges)
@@ -20,7 +20,7 @@ export const createLodge =  async (req, res) => {
     const newLodge = new Lodge(req.body)
     const savedLodge = await newLodge.save().
     catch(err => {
-        res.status(500).json(err)
+        next(err)
     })
 
     res.status(200).json(savedLodge)
@@ -33,7 +33,7 @@ export const updateLodge = async (req, res) => {
     },{
         new: true
     }).catch(err => {
-        res.status(500).json(err);
+        next(err);
     })
 
     res.status(200).json(updatedLodge)
@@ -42,7 +42,7 @@ export const updateLodge = async (req, res) => {
 export const deleteLodge = async (req, res) => {
     await Lodge.findOneAndDelete(req.params.id).catch(
        err => {
-           res.status(500).json(err)
+           next(err)
        }
     )
     res.status(200).json("Successfully Deleted")
