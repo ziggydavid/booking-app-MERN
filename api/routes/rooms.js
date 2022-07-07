@@ -12,7 +12,7 @@ router.get('/:id', getRoom)
 //update
 router.put('/:id',verifyAdmin, updateRoom)
 //create
-router.post('/', verifyAdmin,createRoom)
+router.post('/:lodgeId', verifyAdmin,createRoom)
 //Delete
 router.delete('/:id',verifyAdmin, deleteRoom)
 
