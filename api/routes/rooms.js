@@ -1,0 +1,22 @@
+import { verifyAdmin } from "../utils/verifyToken.js";
+import {updateRoom,getRoom,deleteRoom, getRooms, createRoom } from "../controllers/roomController.js";
+
+
+
+
+const router = express.Router()
+//get all
+router.get('/', getRooms)
+//get
+router.get('/:id', getRoom)
+//update
+router.put('/:id',verifyAdmin, updateRoom)
+//create
+router.post('/', verifyAdmin,createRoom)
+//Delete
+router.delete('/:id',verifyAdmin, deleteRoom)
+
+
+
+
+export default router
