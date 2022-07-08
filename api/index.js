@@ -5,7 +5,7 @@ import authRouter from "./routes/auth.js";
 import lodgeRouter from './routes/lodges.js';
 import cookieParser from "cookie-parser";
 import userRouter from './routes/users.js'
-
+import roomRouter from './routes/rooms.js';
 
 dotenv.config()
 
@@ -19,7 +19,7 @@ const connect = async () => {
     });
     console.log(`DB connected on this ${connection.connection.host}`)
 }
-
+ 
 
 mongoose.connection.on('connected', () => {
     console.log("Connected")
@@ -35,6 +35,7 @@ app.use(express.json())
 app.use('/api/auth', authRouter);
 app.use('/api/lodges', lodgeRouter);
 app.use('/api/users', userRouter);
+app.use('/api/rooms', roomRouter);
 
 app.use((err,req,res,next) => {
     const errorStatus = err.status || 500

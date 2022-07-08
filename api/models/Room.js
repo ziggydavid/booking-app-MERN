@@ -17,22 +17,12 @@ const roomSchema = new Schema({
     trim:true,
     required: true,
 },
-rooms:[{number:Number, unavailableDates:[{ type: Date}]}],
+roomNumbers:[{number:Number, unavailableDates:[{ type: Date}]}],
 maxPeople:{
     type:Number,
     trim:true,
     required: true
-},
-maxPeople:{
-    type:Number,
-    trim:true,
-    required: true
-},
-
-
-
-
-
+} 
 },{timestamps: true});
 
 export default mongoose.model("room", roomSchema)

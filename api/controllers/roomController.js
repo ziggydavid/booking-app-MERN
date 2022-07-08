@@ -1,17 +1,19 @@
-import Room from "../models/Room";
-import Lodge from "../models/Lodge";
+import Room from "../models/Room.js";
+import Lodge from "../models/Lodge.js";
 
 export const createRoom = async (req, res, next) => {
-    const lodge = req.body.lodgeId
+    const lodge = req.params.lodgeId
     const newRoom = await new Room(req.body).save()
-    const savedRoom = await Lodge.findByIdAndUpdate(lodge,{
+    .catch(err => next(err))
+     await Lodge.findByIdAndUpdate(lodge,{
         $push:{rooms:newRoom._id}
      })
     .catch(err => {
         next(err)
     })
-    res.status(200).json(savedRoom)
-    .catch(err => next(err))
+    
+    res.status(200).json(newRoom)
+    
 }
 
 export const updateRoom = async (req, res, next) => {
@@ -24,8 +26,7 @@ export const updateRoom = async (req, res, next) => {
 
 
 export const deleteRoom = async (req, res, next) => {
-    await Room.findByIdAndDelete(req.body.id)
-    .catch(err => next(err))
+    await Room.findByIdAndDelete(req.params.id).catch(err => next(err))
     res.status(200).json("Room Successfully Deleted")
 }
 

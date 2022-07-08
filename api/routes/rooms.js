@@ -1,3 +1,4 @@
+import express from "express";
 import { verifyAdmin } from "../utils/verifyToken.js";
 import {updateRoom,getRoom,deleteRoom, getRooms, createRoom } from "../controllers/roomController.js";
 
