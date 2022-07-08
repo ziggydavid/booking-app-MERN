@@ -7,7 +7,7 @@ import {updateRoom,getRoom,deleteRoom, getRooms, createRoom } from "../controlle
 
 const router = express.Router()
 //get all
-router.get('/', getRooms)
+router.get('/',verifyAdmin, getRooms)
 //get
 router.get('/:id', getRoom)
 //update
@@ -15,7 +15,7 @@ router.put('/:id',verifyAdmin, updateRoom)
 //create
 router.post('/:lodgeId', verifyAdmin,createRoom)
 //Delete
-router.delete('/:id',verifyAdmin, deleteRoom)
+router.delete('/:id/:lodgeId',verifyAdmin, deleteRoom)
 
 
 
