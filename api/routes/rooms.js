@@ -7,7 +7,7 @@ import {updateRoom,getRoom,deleteRoom, getRooms, createRoom } from "../controlle
 
 const router = express.Router()
 //get all
-router.get('/',verifyAdmin, getRooms)
+router.get('/', getRooms)
 //get
 router.get('/:id', getRoom)
 //update
