@@ -23,15 +23,26 @@ export const registerController = async (req, res, next) => {
 
 
 export const loginController = async (req, res, next) => {
-    const user = await User.findOne({username:req.body.username})
+    let user = null;
+    try {
+        user = await User.findOne({username:req.body.username})
+        if(!user) {
+            try{
+               user =  await User.findOne({email:req.body.username})
+        }catch (err){
+            next(err)
+        }
+    }
+    }
+    catch (err){
+        next(err);
+    }
     if (!user) return next(createErr(404, "This account does not exist"))
-    .catch(err => next(err))
+   
 
-    const passwordCorrect = await bcrypt.compareSync(req.body.password, user.password);
+    const passwordCorrect = bcrypt.compareSync(req.body.password, user.password)
     if(!passwordCorrect) return(next(createErr(400,"Wrong user Credentials")))
-    .catch(
-        err => next(err)
-    )
+
     const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.SECRET_KEY)
     const {password, isAdmin, ...otherDetails } = user._doc
 
